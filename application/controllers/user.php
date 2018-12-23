@@ -17,4 +17,26 @@ class User extends CI_Controller {
     $this->load->view('layout/header');
     $this->load->view('user/profile',$data);
   }
+
+
+	public function addevent(){
+		if(!$this->user_model->is_loggedIn())  {
+				redirect('login');
+			}
+		$this->form_validation->set_rules('nama','Nama Penyelenggara');
+		$this->form_validation->set_rules('gs','Pengisi Acara','required');
+		$this->form_validation->set_rules('tanggal','Tanggal Pelaksanaan','required');
+		$this->form_validation->set_rules('mulai','Waktu Mulai Acara','required');
+		$this->form_validation->set_rules('selesai','Waktu Selesai Acara','required');
+		$this->form_validation->set_rules('tempat','Tempat Pelaksanaan','required');
+
+
+		if($this->form_validation->run() === false){
+			$this->load->view('layout/header');
+			$this->load->view('user/addevent');
+		}else {
+			$this->user_model->addevent();
+
+		}
+}
 }

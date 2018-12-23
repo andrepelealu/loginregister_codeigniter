@@ -14,6 +14,7 @@ class User_Model extends CI_Model
 
     $data = [
       'email' => $this->input->post('email'),
+      'nama' => $this->input->post('nama'),
       'password'=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
       'token' => $_SESSION['token']
     ];
@@ -41,7 +42,28 @@ class User_Model extends CI_Model
     }
     return true;
   }
+  public function addevent()
+  {
+    // $this->load->helper('string');
+    // $_SESSION['token'] = random_string('alnum',16);
 
+    $data = [
+      'nama'          => $this->input->post('nama'),
+      'gs'            => $this->input->post('gs'),
+      'tanggal'       => $this->input->post('tanggal'),
+      'waktu_mulai'   => $this->input->post('mulai'),
+      'waktu_selesai' => $this->input->post('selesai'),
+      'tempat'        => $this->input->post('tempat')
+    ];
+    $bisa = $this->db->insert('event', $data);
+    if($bisa){
+      echo "sukses";
+    }
+  }
+  public function tampiluser()
+  {
+    return $this->db->get('users');
+  }
 }
 
  ?>

@@ -13,6 +13,7 @@ class Auth extends CI_Controller {
   {
 
 		$this->form_validation->set_rules('email','Email','required|is_unique[users.email]');
+		$this->form_validation->set_rules('nama','Nama Penyelenggara','required');
 		$this->form_validation->set_rules('password','Password','required');
 		$this->form_validation->set_rules('password2','Konfirmasi Password','required|matches[password]');
 
